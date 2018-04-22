@@ -58,7 +58,7 @@ following Lisp form:
   * Type `EXTERNAL-SYMBOL-NOT-FOUND` - denotes conditions signaled when the Lisp
   reader encountered a non-existing external symbol of a package.
   * Predicate `EXTERNAL-SYMBOL-NOT-FOUND-P` - returns true iff the condition
-  is of type `EXTERNAL-SYMBOL-NOT-FOUND``.
+  is of type `EXTERNAL-SYMBOL-NOT-FOUND`.
   * Function `EXTERNAL-SYMBOL-NOT-FOUND-SYMBOL-NAME` - retrieves the symbol name
   from the condition instance.
   * Function `EXTERNAL-SYMBOL-NOT-FOUND-PACKAGE` - retrieves the package object

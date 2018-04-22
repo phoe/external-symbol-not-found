@@ -22,7 +22,8 @@
     #+abcl (reader-error
             (let ((string (princ-to-string condition)))
               (and (search "The symbol \"" string)
-                   (search "\" was not found in package " string))))))
+                   (or (search "\" is not external in package " string)
+                       (search "\" was not found in package " string)))))))
 
 (defun external-symbol-not-found-symbol-name (condition)
   #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
@@ -34,8 +35,11 @@
   #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
   #+(or sbcl ccl ecl) (second (simple-condition-format-control condition))
   #+abcl (let* ((string (princ-to-string condition))
-                (position (+ (search "\" was not found in package " string)
-                             (length "\" was not found in package ")))
+                (position (if (search "\" was not found in package " string)
+                            (+ (search "\" was not found in package " string)
+                               (length "\" was not found in package "))
+                            (+ (search "\" is not external in package " string)
+                               (length "\" is not external in package "))))
                 (package-name (read-from-string string t nil
                                                 :start position
                                                 :end (1- (length string)))))
