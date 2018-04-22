@@ -4,7 +4,7 @@
   :description #.(format nil "Portability library for detecting reader ~
 errors coming from reading non-existing or non-external symbols in packages")
   :author "Michał \"phoe\" Herda <phoe@teknik.io>"
-  :license  "CC0 / public domain"
+  :license  "Unlicense"
   :version "0.0.1"
   :serial t
   :components ((:file "package")

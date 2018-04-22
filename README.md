@@ -66,5 +66,4 @@ following Lisp form:
 
 ## License
 
-CC0 - public domain. Do whatever you want with it, the code is here to be
-useful.
+Unlicense. Do whatever you want with it, the code is here to be useful.
