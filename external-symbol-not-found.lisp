@@ -3,7 +3,7 @@
 (in-package #:external-symbol-not-found)
 
 (deftype external-symbol-not-found ()
-  '(and condition (satisfies external-symbol-not-found)))
+  '(and condition (satisfies external-symbol-not-found-p)))
 
 (defun external-symbol-not-found-p (condition)
   #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
@@ -27,13 +27,13 @@
 
 (defun external-symbol-not-found-symbol-name (condition)
   #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
-  #+(or sbcl ccl ecl) (first (simple-condition-format-control condition))
+  #+(or sbcl ccl ecl) (first (simple-condition-format-arguments condition))
   #+abcl (let ((string (princ-to-string condition)))
            (read-from-string string t nil :start 11)))
 
 (defun external-symbol-not-found-package (condition)
   #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
-  #+(or sbcl ccl ecl) (second (simple-condition-format-control condition))
+  #+(or sbcl ccl ecl) (second (simple-condition-format-arguments condition))
   #+abcl (let* ((string (princ-to-string condition))
                 (position (if (search "\" was not found in package " string)
                             (+ (search "\" was not found in package " string)
