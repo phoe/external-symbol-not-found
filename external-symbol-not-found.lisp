@@ -49,21 +49,3 @@
 (defun not-supported-error ()
   (error "Your implementation, ~A, is not supported. Please consider writing ~
 a patch to this library." (lisp-implementation-type)))
-
-(defun test ()
-  #+(not (or sbcl ccl ecl abcl)) (not-supported-error)
-  (unwind-protect
-       (handler-case (progn
-                       (make-package 'test-package-12345 :use nil)
-                       (read-from-string "test-package-12345:symbol"))
-         (error (e)
-           (assert (external-symbol-not-found-p e))))
-    (delete-package 'test-package-12345))
-  (unwind-protect
-       (handler-case (progn
-                       (make-package 'test-package-12345 :use nil)
-                       (intern "SYMBOL" 'test-package-12345)
-                       (read-from-string "test-package-12345:symbol"))
-         (error (e)
-           (assert (external-symbol-not-found-p e))))
-    (delete-package 'test-package-12345)))
