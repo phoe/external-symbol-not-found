@@ -26,7 +26,7 @@ errors coming from reading non-existing or non-external symbols in packages")
   :description "Tests for external-symbol-not-found"
   :author ("Michał \"phoe\" Herda <phoe@teknik.io>"
            "Francis St-Amour <fr.stamour@gmail.com")
-  :depends-on (#:parachute)
+  :depends-on (#:external-symbol-not-found #:parachute)
   :license  "Unlicense"
   :version "0.0.2"
   :serial t
